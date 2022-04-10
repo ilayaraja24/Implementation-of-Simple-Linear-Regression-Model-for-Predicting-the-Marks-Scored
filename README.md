@@ -61,8 +61,8 @@ plt.ylabel("loss")
 ```
 
 ## Output:
-![GITHUB LOGO](ex2.png)
 ![GITHUB LOGO](EXERCISE2.png)
+![GITHUB LOGO](ex2.png)
 
 
 ## Result:
