@@ -27,36 +27,39 @@ RegisterNumber:212221040057
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-data=pd.read_csv("/content/student_scores - student_scores.csv")
-data.head()
-data.isnull().sum()
-x=data.Hours
-x.head()
-y=data.Scores
-y.head()
-n=len(x)
-m=0
-c=0
-l=0.001
-loss=[]
-for i in range(10000):
-    ypred=m*x+c
-    MSE=(1/n)*sum((ypred-y)*2)
-    dm=(2/n)*sum(x*(ypred-y))
-    dc=(2/n)*sum(ypred-y)
-    c=c-l*dc
-    m=m-l*dm
-    loss.append(MSE)
-    #print(m,c)
-    ypred=m*x+c
-plt.scatter(x,y,color="blue")
-plt.plot(x,ypred)
-plt.xlabel("study hours")
-plt.ylabel("scores")
-plt.title("study hour vs scores")
-plt.plot(loss)
-plt.xlabel("iteration")
-plt.ylabel("loss")
+navu=pd.read_csv('/content/student_scores - student_scores.csv')
+navu.head()
+X=navu.iloc[:,:-1].values
+X
+y=navu.iloc[:,1].values
+y
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=1/3,random_state=0)
+from sklearn.linear_model import LinearRegression
+regressor=LinearRegression()
+regressor.fit(X_train,y_train)
+y_pred=regressor.predict(X_test)
+y_pred
+y_test
+plt.scatter(X_train,y_train,color='blue')
+plt.plot(X_train,regressor.predict(X_train),color="brown")
+plt.title("h vs s (Training Set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
+plt.scatter(X_test,y_test,color='black')
+plt.plot(X_test,regressor.predict(X_test),color="orange")
+plt.title("h vs s (Testing Set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
+
+
+
+    
+
+Output:
+
     
 ```
 
